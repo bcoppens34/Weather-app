@@ -1,22 +1,20 @@
 $(document).ready(function () {
 
-  // display current date
+  
   $('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY'));
 
   checkDataInLocalStorage();
 
-  // set elements - API Key
-  // API Key for all weather data 
+  
 var APIKey = "6bf413c2e88cb4ca8e5252acc70d8770";
 var city = "";
 
-  // function for when the Search Button is clicked
+ 
   $('.searchBtn').on('click', function (event) {
 
     event.preventDefault();
 
-    //get user input for City then save info to localStorage
-
+  
     city = $("#formInputCity").val();
     if (city === '') {
         return alert('Enter City');
@@ -27,11 +25,9 @@ var city = "";
 
   });
 
-  //function for getting weather info
   function getWeatherInfo(city) {
     var queryAPI = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
     $.ajax({
-        // gets the current weather info
         url: queryAPI,
         method: "GET",
         error: (err => { //If API through error then alert 
@@ -61,7 +57,6 @@ var city = "";
     });
 }
 
-// function for saving info to localstorage
 function saveInfoToLocalStorage(city) {
   var data = localStorage.getItem('cities-recently-searched');
   if (data) {
@@ -77,7 +72,6 @@ function saveInfoToLocalStorage(city) {
   }
 }
 
-  // 5 Day forecast display function
   function displayFiveDayForecast(city) {
     $.ajax({ // gets the 5 day forecast API
         url: "https://api.openweathermap.org/data/2.5/forecast?id=" + city + "&units=imperial&APPID=" + APIKey,
@@ -111,7 +105,6 @@ function saveInfoToLocalStorage(city) {
     });
 };
 
-  // Check data stored in local storage function
   function checkDataInLocalStorage() {
     var storedCities = localStorage.getItem('cities-recently-searched');
     var dataArray = [];
@@ -126,7 +119,6 @@ function saveInfoToLocalStorage(city) {
     }
 };
 
-  // Recent Searched Cities Buttons List function
   function createRecentCitySearchedBtn(city) {
    var buttonsList = $("<div>")
     var recentCityButton = $('<button type="submit" class="btn btn-secondary atlanta">');
